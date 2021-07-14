@@ -2,18 +2,30 @@ import React from "react";
 import { useTracker } from "meteor/react-meteor-data";
 import Reply from "./Reply";
 import { ReplyCollection } from "/imports/api/ReplyCollection";
+import ReplyInput from "./ReplyInput";
+import LoginForm from "./LoginForm";
 
 export const App = () => {
-  const replies = useTracker(() => ReplyCollection.find({}).fetch());
-  console.log(replies);
+  const user = useTracker(() => Meteor.user());
+  const replies = useTracker(() =>
+    ReplyCollection.find({}, { sort: { createdAt: -1 } }).fetch()
+  );
   return (
     <div>
-      <h1>Welcome to Yo!</h1>
-      <ul>
-        {replies.map((reply) => {
-          return <Reply key={reply._id} reply={reply} />;
-        })}
-      </ul>
+      {user ? (
+        <>
+          <h1>Discussion Board</h1>
+          <ReplyInput />
+          <ul>
+            {replies.map((reply) => {
+              return <Reply key={reply._id} reply={reply} />;
+            })}
+          </ul>
+        </>
+      ) : (
+        <LoginForm />
+      )
+      }
     </div>
   );
 };
