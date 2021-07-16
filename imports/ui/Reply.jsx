@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Reply({ reply }) {
+  console.log(reply)
   return (
       <li>
         <div className="post-message">
@@ -8,7 +9,7 @@ export default function Reply({ reply }) {
         </div>
         <div className="post-author">
           <div>
-            Posted By: {reply.email}
+            Posted By: {reply.username}
           </div>
         </div>
       </li>

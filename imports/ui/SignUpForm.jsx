@@ -11,7 +11,6 @@ export default function LoginForm({setShowLogin}) {
       username: username,
       password: password,
     });
-    setShowLogin(!showLogin);
   };
 
   return (
