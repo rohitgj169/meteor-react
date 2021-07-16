@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Reply({ reply }) {
-  console.log(reply)
+
   return (
       <li>
         <div className="post-message">
