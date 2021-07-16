@@ -25,7 +25,7 @@ export const App = () => {
               <h2>Discussion Board</h2>
             </div>
             <div className="user-container" onClick={logout}>
-              {`${user.username}-Logout`}
+              Logout
             </div>
           </div>
           <ReplyInput user={user} />

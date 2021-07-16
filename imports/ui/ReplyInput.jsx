@@ -10,7 +10,7 @@ export default function ReplyInput( {user} ) {
 
     ReplyCollection.insert({
       text: reply.trim(),
-      username: user.username,
+      username: user.emails[0].address,
       createdAt: new Date(),
     });
 

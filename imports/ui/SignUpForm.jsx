@@ -8,7 +8,7 @@ export default function LoginForm({setShowLogin}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await Accounts.createUser({
-      username: username,
+      email: username,
       password: password,
     });
   };
@@ -18,7 +18,7 @@ export default function LoginForm({setShowLogin}) {
       <div className="login-field">
         <input 
           name="email"
-          type="text"
+          type="email"
           placeholder="Enter Email"
           required
           onChange = { (e) => setUsername(e.target.value)}

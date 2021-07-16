@@ -15,7 +15,7 @@ export default function LoginForm() {
       <div className="login-field">
         <input
           name="email"
-          type="text"
+          type="email"
           placeholder="Enter Email"
           required
           onChange={(e) => setUsername(e.target.value)}
