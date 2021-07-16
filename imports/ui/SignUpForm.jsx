@@ -1,15 +1,18 @@
-import { Meteor } from 'meteor/meteor';
-import React, {useState } from 'react';
+import { Meteor } from "meteor/meteor";
+import React, { useState } from "react";
 
-export default function LoginForm() {
+export default function LoginForm({setShowLogin}) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [username, setUsername] = useState(''); 
-  const [password, setPassword] = useState(''); 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    Meteor.loginWithPassword(username,password);
-  }
+    await Accounts.createUser({
+      username: username,
+      password: password,
+    });
+    setShowLogin(!showLogin);
+  };
 
   return (
     <form className="login-container" onSubmit={handleSubmit}>
@@ -32,8 +35,8 @@ export default function LoginForm() {
         />
       </div>
       <div className="login-button">
-        <button type="submit">Log In</button>
+        <button type="submit">Sign Up</button>
       </div> 
     </form>
-  )
+  );
 }

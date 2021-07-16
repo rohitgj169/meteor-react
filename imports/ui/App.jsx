@@ -1,21 +1,32 @@
-import React from "react";
+import { Meteor } from 'meteor/meteor';
+import React, {useState} from "react";
 import { useTracker } from "meteor/react-meteor-data";
 import Reply from "./Reply";
-import { ReplyCollection } from "/imports/api/ReplyCollection";
+import { ReplyCollection } from "/imports/db/ReplyCollection";
 import ReplyInput from "./ReplyInput";
-import LoginForm from "./LoginForm";
+import UserAuth from './UserAuth';
 
 export const App = () => {
+
   const user = useTracker(() => Meteor.user());
+  const logout = () => Meteor.logout();
   const replies = useTracker(() =>
     ReplyCollection.find({}, { sort: { createdAt: -1 } }).fetch()
   );
+
   return (
-    <div>
+    <div className="app-container">
       {user ? (
         <>
-          <h1>Discussion Board</h1>
-          <ReplyInput />
+          <div className="navbar-container">
+            <div className="title-container">
+              <h2>Discussion Board</h2>
+            </div>
+            <div className="user-container" onClick={logout}>
+              {`${user.username}-Logout`}
+            </div>
+          </div>
+          <ReplyInput user={user}/>
           <ul>
             {replies.map((reply) => {
               return <Reply key={reply._id} reply={reply} />;
@@ -23,7 +34,7 @@ export const App = () => {
           </ul>
         </>
       ) : (
-        <LoginForm />
+        <UserAuth />
       )
       }
     </div>

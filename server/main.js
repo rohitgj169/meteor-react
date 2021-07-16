@@ -1,8 +1,12 @@
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
-import { ReplyCollection } from "/imports/api/ReplyCollection";
+import { ReplyCollection } from "/imports/db/ReplyCollection";
 
-const newReply = (replyText) => ReplyCollection.insert({ reply: replyText });
+const newReply = (replyText, user) =>
+  ReplyCollection.insert({
+    reply: replyText,
+    userId: user._id,
+  });
 
 const SEED_USERNAME = "rohit";
 const SEED_PASSWORD = "password";
@@ -14,4 +18,7 @@ Meteor.startup(() => {
       password: SEED_PASSWORD,
     });
   }
+  // if (ReplyCollection.find().count() === 0) {
+  //   ["First", "Second"].forEach(newReply);
+  // }
 });
